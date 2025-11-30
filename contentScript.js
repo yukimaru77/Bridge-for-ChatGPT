@@ -9,7 +9,6 @@ const DEBUG_BOX_CLASS = 'gpt-translate-debug';
 let md;
 let hljsAvailable = false;
 let katexAutoRenderAvailable = false;
-let debugModeEnabled = false;
 let settingsCache = { targetLang: 'en', sourceLang: 'auto' };
 const PROMPT_TARGET_LANG = 'en';
 const ChatgptLikeMarkdownRenderer = {
@@ -154,22 +153,6 @@ function buildToolbar(article) {
   toolbar.appendChild(button);
   toolbar.appendChild(note);
 
-  if (debugModeEnabled) {
-    const logButton = document.createElement('button');
-    logButton.type = 'button';
-    logButton.className = BUTTON_CLASS;
-    logButton.textContent = 'Export log';
-    logButton.addEventListener('click', () => handleExport(article, logButton));
-
-    const geminiButton = document.createElement('button');
-    geminiButton.type = 'button';
-    geminiButton.className = BUTTON_CLASS;
-    geminiButton.textContent = 'Gemini log';
-    geminiButton.addEventListener('click', () => handleGeminiLog(article, geminiButton));
-
-    toolbar.appendChild(logButton);
-    toolbar.appendChild(geminiButton);
-  }
   return toolbar;
 }
 
@@ -181,7 +164,6 @@ async function handleTranslate(article, button, toolbar) {
   if (!markdown) return;
 
   const settings = await readSettings();
-  const debugMode = Boolean(settings.useSample);
   const useGemini = Boolean(settings.geminiKey);
 
   button.disabled = true;
@@ -210,12 +192,6 @@ async function handleTranslate(article, button, toolbar) {
     // Re-attach the toolbar in case the target replacement removed it.
     if (!article.contains(toolbar)) {
       article.appendChild(toolbar);
-    }
-
-    if (debugMode) {
-      const finalHtml = target.innerHTML;
-      upsertDebugBox(article, finalHtml);
-      downloadHtml(finalHtml);
     }
 
     button.textContent = 'Translated';
@@ -577,7 +553,7 @@ function injectStyles() {
 async function loadSettings() {
   try {
     const settings = await readSettings();
-    debugModeEnabled = Boolean(settings.debugMode);
+    debugModeEnabled = Boolean(settings.debugMode); // legacy, but still read to avoid undefined
     if (settings.targetLang) settingsCache.targetLang = settings.targetLang;
     if (settings.sourceLang) settingsCache.sourceLang = settings.sourceLang;
   } catch {
@@ -592,9 +568,8 @@ function readSettings() {
       resolve({});
       return;
     }
-    api.get(
-      ['useSample', 'geminiKey', 'geminiModel', 'debugMode', 'targetLang', 'sourceLang'],
-      (items) => resolve(items || {})
+    api.get(['useSample', 'geminiKey', 'geminiModel', 'debugMode', 'targetLang', 'sourceLang'], (items) =>
+      resolve(items || {})
     );
   });
 }

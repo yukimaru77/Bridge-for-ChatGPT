@@ -3,7 +3,6 @@ const sourceLangInput = document.getElementById('sourceLang');
 const targetLangInput = document.getElementById('targetLang');
 const geminiKeyInput = document.getElementById('geminiKey');
 const geminiModelInput = document.getElementById('geminiModel');
-const debugModeInput = document.getElementById('debugMode');
 const promptTemplateInput = document.getElementById('promptTemplate');
 
 chrome.storage.sync.get(
@@ -12,7 +11,6 @@ chrome.storage.sync.get(
     'targetLang',
     'geminiKey',
     'geminiModel',
-    'debugMode',
     'promptTemplate'
   ],
   (items) => {
@@ -20,7 +18,6 @@ chrome.storage.sync.get(
     if (items.targetLang) targetLangInput.value = items.targetLang;
     if (items.geminiKey) geminiKeyInput.value = items.geminiKey;
     if (items.geminiModel) geminiModelInput.value = items.geminiModel;
-    debugModeInput.checked = Boolean(items.debugMode);
     promptTemplateInput.value =
       items.promptTemplate ||
       `Translate the following Markdown from {sourceLang} to {targetLang}. Return Markdown only.
@@ -43,7 +40,6 @@ form.addEventListener('submit', (event) => {
       targetLang: targetLangInput.value.trim(),
       geminiKey: geminiKeyInput.value.trim(),
       geminiModel: geminiModelInput.value.trim(),
-      debugMode: debugModeInput.checked,
       promptTemplate: promptTemplateInput.value || ''
     },
     () => {
