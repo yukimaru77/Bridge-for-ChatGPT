@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ChatGPT Translator Button",
-  "version": "0.1.0",
-  "description": "Adds a Translate button to assistant messages, grabs the Markdown, sends it to a translator, and replaces the content with translated HTML.",
+  "name": "Bridge for ChatGPT — Translate & Prompt",
+  "version": "0.2.0",
+  "description": "Translate ChatGPT messages and outgoing prompts (Gemini-powered). Inline Translate button, prompt translate toggle, Markdown render with code/KaTeX.",
   "permissions": [
     "storage"
   ],
