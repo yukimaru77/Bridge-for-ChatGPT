@@ -36,20 +36,20 @@
         const msg = req.messages?.[0]?.content?.parts?.[0];
         const enabled = localStorage.getItem('gpt_inject_toggle') !== 'off';
         if (enabled && typeof msg === 'string') {
-          console.log('[Injected Prompt][original]:', msg);
+          console.log('[Prompt Translate][original]:', msg);
           const translated = await translateToEnglish(msg);
           req.messages[0].content.parts[0] = translated;
-          console.log('[Injected Prompt][translated]:', translated);
+          console.log('[Prompt Translate][translated]:', translated);
           init.body = JSON.stringify(req);
-          window.postMessage({ type: 'gpt-render-original', text: msg, translated }, '*');
-        } else if (!enabled) {
-          console.log('[Injected Prompt]: skipped (toggle off)');
-        }
-      } catch (e) {
-        console.warn('parse failed', e);
+      window.postMessage({ type: 'gpt-render-original', text: msg, translated }, '*');
+    } else if (!enabled) {
+      console.log('[Prompt Translate]: skipped (toggle off)');
+    }
+  } catch (e) {
+    console.warn('parse failed', e);
       }
     }
     return origFetch(input, init);
   };
-  console.log('[hook] prompt injection enabled (page script)');
+  console.log('[hook] prompt translate enabled (page script)');
 })();

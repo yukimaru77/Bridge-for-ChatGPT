@@ -6,11 +6,11 @@ const TOOLBAR_CLASS = 'gpt-translate-toolbar';
 const BUTTON_CLASS = 'gpt-translate-button';
 const NOTE_CLASS = 'gpt-translate-note';
 const DEBUG_BOX_CLASS = 'gpt-translate-debug';
-const COMPOSER_ACTIONS_SELECTOR = '.ms-auto.flex.items-center.gap-1\\.5, .flex.items-center.gap-2';
 let md;
 let hljsAvailable = false;
 let katexAutoRenderAvailable = false;
 let debugModeEnabled = false;
+let settingsCache = { targetLang: 'en', sourceLang: 'auto' };
 const ChatgptLikeMarkdownRenderer = {
   render(markdown) {
     initMarkdownIt();
@@ -40,7 +40,7 @@ function start() {
   initHelpers();
   initMarkdownIt();
   injectPagePromptHook(); // run as early as possible in page context
-  loadDebugMode().then(() => {
+  loadSettings().then(() => {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', scanAndObserve, { once: true });
     } else {
@@ -573,10 +573,12 @@ function injectStyles() {
   document.head.appendChild(style);
 }
 
-async function loadDebugMode() {
+async function loadSettings() {
   try {
     const settings = await readSettings();
     debugModeEnabled = Boolean(settings.debugMode);
+    if (settings.targetLang) settingsCache.targetLang = settings.targetLang;
+    if (settings.sourceLang) settingsCache.sourceLang = settings.sourceLang;
   } catch {
     debugModeEnabled = false;
   }
@@ -589,7 +591,10 @@ function readSettings() {
       resolve({});
       return;
     }
-    api.get(['useSample', 'geminiKey', 'geminiModel', 'debugMode'], (items) => resolve(items || {}));
+    api.get(
+      ['useSample', 'geminiKey', 'geminiModel', 'debugMode', 'targetLang', 'sourceLang'],
+      (items) => resolve(items || {})
+    );
   });
 }
 
@@ -705,8 +710,8 @@ window.addEventListener('message', async (event) => {
     const resp = await chrome.runtime.sendMessage({
       type: 'translate-markdown-gemini',
       markdown: data.text,
-      targetLang: 'en',
-      sourceLang: 'auto'
+      targetLang: settingsCache.targetLang || 'en',
+      sourceLang: settingsCache.sourceLang || 'auto'
     });
     window.postMessage(
       { type: 'gpt-translate-res', id: data.id, ok: Boolean(resp?.ok), text: resp?.translated || '', error: resp?.error },
@@ -743,7 +748,7 @@ function insertInjectToggle() {
   btn.type = 'button';
   btn.className = 'gpt-inject-toggle';
   btn.textContent = isInjectionEnabled() ? 'Inject ON' : 'Inject OFF';
-  btn.title = 'Toggle prompt injection';
+  btn.title = 'Toggle prompt translate';
   btn.addEventListener('click', () => {
     const next = !isInjectionEnabled();
     localStorage.setItem('gpt_inject_toggle', next ? 'on' : 'off');

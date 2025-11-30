@@ -1,12 +1,12 @@
-# ChatGPT Translator / Prompt Injector (Chrome Extension)
+# ChatGPT Translator / Prompt Translate (Chrome Extension)
 
 This extension does two things on ChatGPT:
 
 1) **Translate** button on assistant messages  
    - Grabs Markdown via the native copy button, translates (Gemini if API key is set; otherwise fallback endpoint), renders with markdown-it + highlight.js + KaTeX, and replaces the assistant message.
-2) **Prompt injection hook** (optional toggle)  
-   - Hooks `/backend-api/` requests in the page, sends the user prompt to Gemini to translate it to English, replaces the outgoing prompt, and logs the injected prompt.  
-   - Keeps the original prompt: after 3s, the latest user bubble is re-rendered with the original text and a toggle to show/hide the English version.
+2) **Prompt translate hook** (optional toggle)  
+   - Hooks `/backend-api/` requests in the page, sends the user prompt to Gemini (target language from Options), replaces the outgoing prompt, and logs the translated prompt.  
+   - Keeps the original prompt: after 3s, the latest user bubble is re-rendered with the original text and a Show/Hide toggle for the translated version.
 
 ## Setup
 
@@ -17,8 +17,8 @@ This extension does two things on ChatGPT:
 ## Usage
 
 - **Translate button**: on each assistant turn, click “Translate” to replace the message with translated HTML. Debug mode adds “Export log” / “Gemini log.”
-- **Prompt injection toggle**: near the composer’s audio controls there’s an “Inject ON/OFF” pill (localStorage-backed).  
-  - ON: user prompt is translated to English (Gemini) before sending; original prompt is kept and shown in the last user bubble with a Show EN/Hide EN toggle (3s delay).  
+- **Prompt translate toggle**: near the composer’s audio controls there’s a “Translate ON/OFF” pill (localStorage-backed).  
+  - ON: user prompt is translated to the target language set in Options (Gemini) before sending; original prompt is kept and shown in the last user bubble with a Show/Hide translated toggle (3s delay).  
   - OFF: no injection.
 
 ## Notes
