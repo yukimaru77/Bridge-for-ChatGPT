@@ -23,12 +23,6 @@
       const id = `tx-${Date.now()}-${counter++}`;
       pending.set(id, { resolve, reject });
       window.postMessage({ type: 'gpt-translate-req', id, text }, '*');
-      setTimeout(() => {
-        if (pending.has(id)) {
-          pending.delete(id);
-          reject(new Error('translate timeout'));
-        }
-      }, 5000);
     });
   }
 
