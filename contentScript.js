@@ -11,6 +11,7 @@ let hljsAvailable = false;
 let katexAutoRenderAvailable = false;
 let debugModeEnabled = false;
 let settingsCache = { targetLang: 'en', sourceLang: 'auto' };
+const PROMPT_TARGET_LANG = 'en';
 const ChatgptLikeMarkdownRenderer = {
   render(markdown) {
     initMarkdownIt();
@@ -710,11 +711,17 @@ window.addEventListener('message', async (event) => {
     const resp = await chrome.runtime.sendMessage({
       type: 'translate-markdown-gemini',
       markdown: data.text,
-      targetLang: settingsCache.targetLang || 'en',
+      targetLang: PROMPT_TARGET_LANG,
       sourceLang: settingsCache.sourceLang || 'auto'
     });
     window.postMessage(
-      { type: 'gpt-translate-res', id: data.id, ok: Boolean(resp?.ok), text: resp?.translated || '', error: resp?.error },
+      {
+        type: 'gpt-translate-res',
+        id: data.id,
+        ok: Boolean(resp?.ok),
+        text: resp?.translated || '',
+        error: resp?.error
+      },
       '*'
     );
   } catch (error) {

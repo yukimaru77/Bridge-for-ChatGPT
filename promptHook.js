@@ -10,8 +10,12 @@
     const entry = pending.get(data.id);
     if (!entry) return;
     pending.delete(data.id);
-    if (data.ok) entry.resolve(data.text || '');
-    else entry.reject(new Error(data.error || 'translate failed'));
+    if (data.ok) {
+      entry.resolve(data.text || '');
+    } else {
+      console.warn('[Prompt Translate] translate failed:', data.error);
+      entry.reject(new Error(data.error || 'translate failed'));
+    }
   });
 
   function translateToEnglish(text) {
