@@ -30,3 +30,8 @@ This extension does two things on ChatGPT:
   - `promptHook.js` (page-level fetch hook for prompt injection)  
   - `background.js` (Gemini translate endpoint)  
   - `options.html` / `options.js` (settings UI)
+
+## TODO
+- Gemini: retry/fallback handling for slow or failed responses; guard long outputs (truncate or stream).
+- Error handling: clearer user-facing errors instead of console logs.
+- Multi-provider support: add Claude / Gemini (UI selection) and generic custom endpoint mode.
