@@ -814,8 +814,10 @@ function renderOriginalAfterDelay(originalMd, translatedMd) {
           target.parentElement.querySelector('div:not(.sr-only)');
         if (alt) target = alt;
       }
-      console.log('[translator] will render original into:', target?.tagName, target?.className);
-      console.log('[translator] original markdown:', originalMd);
+      if (debugModeEnabled) {
+        console.log('[translator] will render original into:', target?.tagName, target?.className);
+        console.log('[translator] original markdown:', originalMd);
+      }
       const originalRendered = ChatgptLikeMarkdownRenderer.render(originalMd);
       const translatedRendered = translatedMd
         ? ChatgptLikeMarkdownRenderer.render(translatedMd)
@@ -853,7 +855,9 @@ function renderOriginalAfterDelay(originalMd, translatedMd) {
         target.appendChild(originalBox);
       }
 
-      console.log('[translator] rendered original markdown into last user turn');
+      if (debugModeEnabled) {
+        console.log('[translator] rendered original markdown into last user turn');
+      }
     } catch (error) {
       console.warn('[translator] render original failed', error);
     }

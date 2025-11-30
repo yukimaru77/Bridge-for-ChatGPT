@@ -36,10 +36,14 @@
         const msg = req.messages?.[0]?.content?.parts?.[0];
         const enabled = localStorage.getItem('gpt_inject_toggle') !== 'off';
         if (enabled && typeof msg === 'string') {
-          console.log('[Prompt Translate][original]:', msg);
+          if (localStorage.getItem('gpt_inject_toggle') === 'on') {
+            console.log('[Prompt Translate][original]:', msg);
+          }
           const translated = await translateToEnglish(msg);
           req.messages[0].content.parts[0] = translated;
-          console.log('[Prompt Translate][translated]:', translated);
+          if (localStorage.getItem('gpt_inject_toggle') === 'on') {
+            console.log('[Prompt Translate][translated]:', translated);
+          }
           init.body = JSON.stringify(req);
       window.postMessage({ type: 'gpt-render-original', text: msg, translated }, '*');
     } else if (!enabled) {
