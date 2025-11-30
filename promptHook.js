@@ -23,6 +23,7 @@
       const id = `tx-${Date.now()}-${counter++}`;
       pending.set(id, { resolve, reject });
       window.postMessage({ type: 'gpt-translate-req', id, text }, '*');
+      // No timeout: wait until response or failure
     });
   }
 
@@ -43,12 +44,12 @@
             console.log('[Prompt Translate][translated]:', translated);
           }
           init.body = JSON.stringify(req);
-      window.postMessage({ type: 'gpt-render-original', text: msg, translated }, '*');
-    } else if (!enabled) {
-      console.log('[Prompt Translate]: skipped (toggle off)');
-    }
-  } catch (e) {
-    console.warn('parse failed', e);
+          window.postMessage({ type: 'gpt-render-original', text: msg, translated }, '*');
+        } else if (!enabled) {
+          console.log('[Prompt Translate]: skipped (toggle off)');
+        }
+      } catch (e) {
+        console.warn('parse failed', e);
       }
     }
     return origFetch(input, init);
