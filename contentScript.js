@@ -695,11 +695,19 @@ function replaceBodyWithRendered(target, markdown) {
 function injectPagePromptHook() {
   if (window.__gpt_prompt_hooked) return;
   window.__gpt_prompt_hooked = true;
-  const script = document.createElement('script');
-  script.src = chrome.runtime.getURL('promptHook.js');
-  script.onload = () => script.remove();
-  script.onerror = (e) => console.warn('[translator] prompt hook load failed', e);
-  (document.documentElement || document.head || document.body).appendChild(script);
+  const append = () => {
+    const host = document.documentElement || document.head || document.body;
+    if (!host) {
+      setTimeout(append, 50);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = chrome.runtime.getURL('promptHook.js') + `?v=${Date.now()}`;
+    script.onload = () => script.remove();
+    script.onerror = (e) => console.warn('[translator] prompt hook load failed', e);
+    host.appendChild(script);
+  };
+  append();
 }
 
 // Bridge: page -> background (Gemini) -> page
@@ -741,9 +749,18 @@ window.addEventListener('message', (event) => {
 });
 
 function setupInjectToggle() {
-  insertInjectToggle();
-  const observer = new MutationObserver(() => insertInjectToggle());
-  observer.observe(document.body, { childList: true, subtree: true });
+  const init = () => {
+    insertInjectToggle();
+    const root = document.body;
+    if (!root) return;
+    const observer = new MutationObserver(() => insertInjectToggle());
+    observer.observe(root, { childList: true, subtree: true });
+  };
+  if (document.body) {
+    init();
+  } else {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  }
 }
 
 function insertInjectToggle() {
