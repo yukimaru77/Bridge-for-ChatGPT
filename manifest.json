@@ -2,6 +2,8 @@
   "manifest_version": 3,
   "name": "Bridge for ChatGPT — Translate & Prompt",
   "version": "0.2.0",
+  "author": "yukimaru77",
+  "homepage_url": "https://github.com/yukimaru77",
   "description": "Translate ChatGPT messages and outgoing prompts (Gemini-powered). Inline Translate button, prompt translate toggle, Markdown render with code/KaTeX.",
   "permissions": [
     "storage"
