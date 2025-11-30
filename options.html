@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ChatGPT Translator Settings</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 24px;
+        color: #111827;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        margin-bottom: 16px;
+      }
+      button {
+        background: #10a37f;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+      .hint {
+        color: #6b7280;
+        font-size: 12px;
+        margin-top: -10px;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ChatGPT Translator</h1>
+    <p>Configure source/target languages and your Gemini API key.</p>
+
+    <form id="settings">
+      <label for="sourceLang">Source language code</label>
+      <input id="sourceLang" name="sourceLang" type="text" placeholder="auto" />
+      <div class="hint">Use ISO language codes (e.g., en, ja). Default: auto (let model detect).</div>
+
+      <label for="targetLang">Target language code</label>
+      <input id="targetLang" name="targetLang" type="text" placeholder="ja" />
+      <div class="hint">Use ISO language codes (e.g., ja, en, fr). Defaults to ja.</div>
+
+      <label for="geminiKey">Gemini API key</label>
+      <input id="geminiKey" name="geminiKey" type="text" placeholder="AIza..." />
+      <div class="hint">Used when translating via Gemini. Stored in chrome.storage.sync.</div>
+
+      <label for="geminiModel">Gemini model</label>
+      <input id="geminiModel" name="geminiModel" type="text" placeholder="gemini-flash-latest" />
+      <div class="hint">Default: gemini-flash-latest</div>
+
+      <label for="promptTemplate">Prompt template (optional)</label>
+      <textarea id="promptTemplate" name="promptTemplate" rows="14"></textarea>
+      <div class="hint">You can adjust the prompt sent to Gemini. Placeholders: {sourceLang}, {targetLang}, {markdown}.</div>
+
+      <label>
+        <input id="debugMode" name="debugMode" type="checkbox" /> Debug mode (show Export/Gemini log buttons)
+      </label>
+      <div class="hint">Enabled: shows log buttons and extra outputs</div>
+
+      <button type="submit">Save</button>
+    </form>
+
+    <script src="options.js"></script>
+  </body>
+</html>

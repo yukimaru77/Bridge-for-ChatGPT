@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Translator Button",
+  "version": "0.1.0",
+  "description": "Adds a Translate button to assistant messages, grabs the Markdown, sends it to a translator, and replaces the content with translated HTML.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*"
+      ],
+      "js": [
+        "vendor/highlight.min.js",
+        "vendor/katex.min.js",
+        "vendor/katex-auto-render.min.js",
+        "vendor/markdown-it-katex.js",
+        "vendor/markdown-it.min.js",
+        "contentScript.js"
+      ],
+      "css": [
+        "vendor/highlight.min.css",
+        "vendor/katex.min.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "promptHook.js"
+      ],
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*"
+      ]
+    }
+  ]
+}
