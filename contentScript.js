@@ -40,14 +40,17 @@ function start() {
   injectStyles();
   initHelpers();
   initMarkdownIt();
-  injectPagePromptHook(); // run as early as possible in page context
   loadSettings().then(() => {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', scanAndObserve, { once: true });
-    } else {
+    const init = () => {
+      injectPagePromptHook(); // run after DOM is ready
       scanAndObserve();
+      setupInjectToggle();
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
     }
-    setupInjectToggle();
   });
 }
 
