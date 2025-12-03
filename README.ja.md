@@ -1,20 +1,19 @@
 <div align="center">
 
-<a href="./README.md">
+<a href="https://yukimaru77.github.io/Bridge-for-ChatGPT/">
   <img src="https://img.shields.io/badge/English-000000?style=for-the-badge&logo=google-translate&logoColor=white" alt="English">
 </a>
-<a href="./README.ja.md">
+<a href="https://yukimaru77.github.io/Bridge-for-ChatGPT/README.ja.html">
   <img src="https://img.shields.io/badge/日本語-JP?style=for-the-badge&logo=google-translate&logoColor=white&color=B22222" alt="日本語">
 </a>
-<a href="./README.zh.md">
+<a href="https://yukimaru77.github.io/Bridge-for-ChatGPT/README.zh.html">
   <img src="https://img.shields.io/badge/简体中文-CN?style=for-the-badge&logo=google-translate&logoColor=white&color=D32F2F" alt="简体中文">
 </a>
-<a href="./README.ko.md">
+<a href="https://yukimaru77.github.io/Bridge-for-ChatGPT/README.ko.html">
   <img src="https://img.shields.io/badge/한국어-KR?style=for-the-badge&logo=google-translate&logoColor=white&color=000080" alt="한국어">
 </a>
 
 </div>
-
 
 # Bridge for ChatGPT (日本語)
 
