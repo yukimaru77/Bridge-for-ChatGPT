@@ -1,4 +1,4 @@
 {
   "appName": { "message": "Bridge for ChatGPT — Translate & Prompt" },
-  "appDesc": { "message": "ChatGPT가 영어에 가장 잘 응답하는 것은 잘 알려져 있습니다. 이 확장 프로그램은 보낸 프롬프트를 내부적으로 자동 영어 번역해 품질을 높이고, ChatGPT 답변은 버튼 한 번으로 즉시 일본어로 옮길 수 있습니다." }
+  "appDesc": { "message": "ChatGPT가 영어에 가장 잘 응답하는 것은 잘 알려져 있습니다. 이 확장 프로그램은 보낸 프롬프트를 내부적으로 자동 영어 번역해 품질을 높입니다. 또한 ChatGPT 답변은 버튼 한 번으로 즉시 일본어로 옮길 수 있습니다." }
 }

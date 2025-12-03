@@ -1,4 +1,4 @@
 {
   "appName": { "message": "Bridge for ChatGPT — Translate & Prompt" },
-  "appDesc": { "message": "On sait que ChatGPT répond le mieux en anglais. Cette extension traduit automatiquement vos prompts en anglais pour améliorer la qualité et ramène les réponses de ChatGPT en japonais en un clic." }
+  "appDesc": { "message": "On sait que ChatGPT répond le mieux en anglais. Cette extension traduit automatiquement vos prompts en anglais pour améliorer la qualité. Elle permet aussi de ramener les réponses de ChatGPT en japonais en un clic." }
 }

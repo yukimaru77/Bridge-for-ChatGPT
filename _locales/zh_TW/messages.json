@@ -1,4 +1,4 @@
 {
   "appName": { "message": "Bridge for ChatGPT — Translate & Prompt" },
-  "appDesc": { "message": "眾所周知 ChatGPT 在使用英語時回應品質最佳。此擴充功能會自動將你發送的提示詞翻成英語以提升品質，ChatGPT 的回覆可一鍵立即翻回日語。" }
+  "appDesc": { "message": "眾所周知 ChatGPT 在使用英語時回應品質最佳。此擴充功能會自動將你發送的提示詞翻成英語以提升品質。此外，ChatGPT 的回覆可一鍵立即翻回日語。" }
 }
