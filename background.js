@@ -4,6 +4,7 @@ const SAMPLE_URL = chrome.runtime.getURL('sample.md');
 const DEFAULT_GEMINI_MODEL = 'gemini-flash-latest';
 const DEFAULT_PROMPT =
   `Translate the following Markdown from auto to {targetLang}. Return Markdown only.\n` +
+  `Make the translation natural and fluent in {targetLang}, not literal word-by-word.\n` +
   `Keep code fences, lists, tables intact. Do not translate or alter inline/block code.\n` +
   `Math/LaTeX must remain math: preserve $...$, $$...$$, \\(...\\), \\[...\\].\n` +
   `If you see bare bracketed math like [ ... ] or ( ... ) that appears to be math, wrap it in $$ ... $$ (block) or $ ... $ (inline) as appropriate instead of leaving raw brackets.\n` +

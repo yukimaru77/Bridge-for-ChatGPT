@@ -1,23 +1,41 @@
-﻿# Bridge for ChatGPT — Translate & Prompt
+# Bridge for ChatGPT — Translate & Prompt
 
-## What it does
-- Translate assistant messages (button on each assistant turn). Renders with markdown-it + highlight.js + KaTeX.
-- Translate outgoing prompts (toggle near the composer). Rewrites the prompt via Gemini, keeps the original, and shows a Show/Hide translated toggle in the last user bubble.
+![Version](https://img.shields.io/badge/version-1.0.0-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Quick setup
-1. Load unpacked in Chrome: `chrome://extensions` → Developer mode → Load unpacked → this folder.
-2. Options: set **Source/Target language**.
-3. Options: set **Gemini API key** (model optional) and (if needed) prompt template.
+**Bridge for ChatGPT** allows you to use ChatGPT in your native language while leveraging the superior reasoning capabilities of English prompts.
 
-## Quick use
-- Assistant messages: click **Translate** to overwrite the message with translated HTML.
-- Prompts: toggle **Translate ON/OFF** near the composer. ON = prompt is translated to target language before sending; original + translated toggle appears in the last user bubble after ~3s.
+## 🚀 Overview
+Did you know ChatGPT often provides smarter, more logical responses when questioned in English?
+This extension bridges the language gap. It automatically translates your prompts into English before sending them, maximizing AI performance. When the English response arrives, you can translate it back to your preferred language with a single click.
 
-## Files
-- manifest.json, background.js, contentScript.js, promptHook.js, options.html, options.js
-- vendor/ (markdown-it, highlight.js, KaTeX, etc.)
-- README.ja.md, README.zh.md, README.ko.md
+## ✨ Key Features
+* **Auto-Translate Prompts:** Type in your native language (Japanese, Chinese, Korean, etc.); the extension automatically converts it to English before sending.
+* **On-Demand Reply Translation:** A "Translate" button appears next to each ChatGPT response. Click it to read the answer in your native language.
+* **Preserves Formatting:** Markdown, syntax highlighting for code, and KaTeX math formulas are preserved even after translation.
+* **Toggle Switch:** Easily enable/disable the prompt translation feature directly from the chat interface.
+* **Powered by Gemini:** Uses Google's Gemini API for high-quality, high-speed translation.
 
-## TODO
-- Gemini retry/fallback and long-output handling; clearer error UI.
-- Provider selection: add Claude/custom endpoint.
+## 🛠 Prerequisites
+To use this extension, you need a free **Google Gemini API Key**.
+* [Get API Key here (Google AI Studio)](https://aistudio.google.com/app/apikey)
+
+## ⚙️ Installation & Setup
+
+1.  **Install the Extension**
+    * Download from the [Chrome Web Store](#) (Link here) or load it unpacked via Developer Mode.
+
+2.  **Configure Settings**
+    * Click the extension icon 🧩 and open **Options**.
+    * **Your Main Language**: Select the language you want to use (e.g., Japanese, Chinese Simplified).
+    * **Gemini API Key**: Paste the key you obtained from Google AI Studio.
+    * Click **Save Settings**.
+
+3.  **Enjoy!**
+    * Open [chatgpt.com](https://chatgpt.com).
+    * Make sure the "Bridge" toggle is **ON**.
+    * Type in your native language.
+
+## 🔒 Privacy Policy
+* **Data Handling:** Your input text is sent to the Gemini API solely for the purpose of translation.
+* **No Storage:** We do not store your prompts, conversation history, or personal data on our servers.
+* **Direct Connection:** The extension communicates directly between your browser and the API providers (OpenAI/Google).

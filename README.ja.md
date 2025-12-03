@@ -1,23 +1,39 @@
-# ChatGPT 翻訳＆プロンプト変換 (Chrome 拡張)
+# Bridge for ChatGPT (日本語)
 
-## 何ができるか
-- アシスタント返信を翻訳（各返信の Translate ボタン）。markdown-it + highlight.js + KaTeX で再描画。
-- プロンプト翻訳（入力欄付近の Translate ON/OFF）。Gemini で翻訳して送信し、元の文と訳文を最後の user バブルに Show/Hide トグルで表示。
+**Bridge for ChatGPT** は、母国語で使いながら、英語プロンプトによる「賢い」回答を引き出すための拡張機能です。
 
-## かんたん設定
-1. chrome://extensions でデベロッパーモードを ON → 「Load unpacked」でこのフォルダを読み込み。
-2. オプションで ソース/ターゲット言語 を設定。
-3. オプションで Gemini API key（必要ならモデル・プロンプトテンプレ）を設定。
+## 🚀 概要
+ChatGPTは英語で質問したほうが、より論理的で精度の高い回答が得られることをご存知ですか？
+このツールは、あなたの入力を自動的に英語に翻訳してChatGPTに送信します。そして、返ってきた英語の回答は「翻訳ボタン」をクリックするだけで、即座にあなたの言語（日本語など）に翻訳して表示します。
 
-## かんたん使い方
-- アシスタント返信: Translate を押すと訳文で上書き。
-- プロンプト: 入力欄近くの Translate ON/OFF を ON にすると、送信前にターゲット言語へ翻訳。約3秒後、最後の user バブルに原文＋訳文トグルを表示。
+## ✨ 主な機能
+* **プロンプト自動英訳:** 日本語（または設定した言語）で入力するだけで、自動的に英語に変換して送信します。
+* **回答のワンクリック翻訳:** ChatGPTからの英語の回答には「翻訳ボタン」が表示されます。必要なときだけ翻訳して読むことができます。
+* **Markdown・数式の維持:** 翻訳後も、コードブロックのハイライトやKaTeXによる数式表示、太字などの書式は崩れません。
+* **簡単ON/OFF:** チャット画面のスイッチで、機能の有効/無効をすぐに切り替えられます。
+* **Gemini API採用:** GoogleのGeminiモデルを使用し、高速かつ自然な翻訳を実現しています。
 
-## 主なファイル
-- manifest.json, background.js, contentScript.js, promptHook.js, options.html, options.js
-- vendor/（markdown-it, highlight.js, KaTeX など）
-- README.md / README.zh.md / README.ko.md
+## 🛠 必要なもの
+この拡張機能を使用するには、Googleの無料 **Gemini APIキー** が必要です。
+* [APIキーの取得はこちら (Google AI Studio)](https://aistudio.google.com/app/apikey)
 
-## TODO
-- Gemini のリトライ/長文対策、エラーUI強化
-- Claude/カスタムエンドポイント切替
+## ⚙️ セットアップ手順
+
+1.  **拡張機能をインストール**
+    * Chromeウェブストアからインストールします。
+
+2.  **設定画面（Options）を開く**
+    * ツールバーのアイコン🧩をクリックし、Bridge for ChatGPTの「オプション」を開きます。
+    * **Your Main Language**: 翻訳結果を表示したい言語（例: Japanese / 日本語）を選択します。
+    * **Gemini API Key**: 取得したAPIキーを貼り付けます。
+    * **Save Settings** を押して保存します。
+
+3.  **使い方**
+    * [chatgpt.com](https://chatgpt.com) を開きます。
+    * 入力欄付近にある「Bridge」トグルが **ON** になっていることを確認します。
+    * あとは日本語で入力して送信するだけです。
+
+## 🔒 プライバシーポリシー
+* **データの扱い:** ユーザーの入力テキストは、翻訳を行う目的でのみGemini APIに送信されます。
+* **保存なし:** 開発者がユーザーのプロンプト、会話履歴、その他の個人情報をサーバーに保存することはありません。
+* **直接通信:** 通信はすべてユーザーのブラウザとAPIプロバイダ（OpenAI/Google）の間で直接行われます。

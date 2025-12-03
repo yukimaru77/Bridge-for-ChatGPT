@@ -2,7 +2,6 @@ const form = document.getElementById('settings');
 const targetLangInput = document.getElementById('targetLang');
 const geminiKeyInput = document.getElementById('geminiKey');
 const geminiModelInput = document.getElementById('geminiModel');
-const debugModeInput = document.getElementById('debugMode');
 const promptTemplateInput = document.getElementById('promptTemplate');
 
 chrome.storage.sync.get(
@@ -10,17 +9,16 @@ chrome.storage.sync.get(
     'targetLang',
     'geminiKey',
     'geminiModel',
-    'debugMode',
     'promptTemplate'
   ],
   (items) => {
     if (items.targetLang) targetLangInput.value = items.targetLang;
     if (items.geminiKey) geminiKeyInput.value = items.geminiKey;
     if (items.geminiModel) geminiModelInput.value = items.geminiModel;
-    debugModeInput.checked = Boolean(items.debugMode);
     promptTemplateInput.value =
       items.promptTemplate ||
-      `Translate the following Markdown from {sourceLang} to {targetLang}. Return Markdown only.
+      `Translate the following Markdown from auto to {targetLang}. Return Markdown only.
+Make the translation natural and fluent in {targetLang}, not literal word-by-word.
 Keep code fences, lists, tables intact. Do not translate or alter inline/block code.
 Math/LaTeX must remain math: preserve $...$, $$...$$, \\(...\\), \\[...\\].
 If you see bare bracketed math like [ ... ] or ( ... ) that appears to be math, wrap it in $$ ... $$ (block) or $ ... $ (inline) as appropriate instead of leaving raw brackets.
@@ -39,7 +37,6 @@ form.addEventListener('submit', (event) => {
       targetLang: targetLangInput.value.trim(),
       geminiKey: geminiKeyInput.value.trim(),
       geminiModel: geminiModelInput.value.trim(),
-      debugMode: debugModeInput.checked,
       promptTemplate: promptTemplateInput.value || ''
     },
     () => {

@@ -152,7 +152,7 @@ function buildToolbar(article) {
 
   const note = document.createElement('span');
   note.className = NOTE_CLASS;
-  note.textContent = '-> Japanese';
+  note.textContent = `-> ${settingsCache.targetLang || 'target'}`;
 
   toolbar.appendChild(button);
   toolbar.appendChild(note);

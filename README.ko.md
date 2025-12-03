@@ -1,23 +1,39 @@
-# ChatGPT 번역 & 프롬프트 변환 (Chrome 확장)
+# Bridge for ChatGPT (한국어)
 
-## 기능
-- 메시지 번역: 어시스턴트 답변의 Translate 버튼으로 Markdown 복사→(Gemini 또는 대체) 번역→markdown-it + highlight.js + KaTeX로 재렌더링.
-- 프롬프트 번역 토글: 보내기 전에 입력 프롬프트를 Gemini로 대상 언어에 번역하고, 약 3초 후 마지막 user 버블에 원문+번역문 토글을 표시.
+**Bridge for ChatGPT**는 모국어를 사용하면서도, 영어 프롬프트가 제공하는 뛰어난 논리력과 답변 품질을 누릴 수 있도록 돕는 확장 프로그램입니다.
 
-## 간단 설정
-1. chrome://extensions 에서 개발자 모드 ON → Load unpacked 로 이 폴더를 선택.
-2. 옵션에서 소스/타겟 언어 설정.
-3. 옵션에서 Gemini API key 설정(필요 시 모델/프롬프트 템플릿도 설정).
+## 🚀 개요
+ChatGPT에게 영어로 질문했을 때 더 논리적이고 정확한 답변을 얻을 수 있다는 사실을 알고 계신가요?
+이 도구는 사용자의 입력을 자동으로 영어로 번역하여 전송함으로써 AI의 성능을 극대화합니다. 영문 답변이 돌아오면, '번역' 버튼을 클릭하여 즉시 한국어로 변환해 읽을 수 있습니다.
 
-## 간단 사용
-- 어시스턴트 답변: Translate 를 누르면 바로 번역본으로 덮어쓰기.
-- 프롬프트: 입력창 근처 Translate ON/OFF 를 ON 하면, 전송 전에 대상 언어로 번역; 약 3초 후 마지막 user 버블에 원문+번역문 토글 표시.
+## ✨ 주요 기능
+* **프롬프트 자동 번역:** 한국어로 입력하면 자동으로 영어로 변환되어 전송됩니다.
+* **답변 원클릭 번역:** ChatGPT의 답변 옆에 표시되는 '번역(Translate)' 버튼을 누르면 한국어로 즉시 번역됩니다.
+* **서식 완벽 유지:** 번역 후에도 Markdown, 코드 블록 하이라이팅, KaTeX 수식 등이 깨지지 않고 유지됩니다.
+* **간편한 ON/OFF:** 채팅 화면의 토글 스위치로 기능을 쉽게 켜고 끌 수 있습니다.
+* **Gemini API 탑재:** Google Gemini 모델을 사용하여 빠르고 자연스러운 번역을 제공합니다.
 
-## 주요 파일
-- manifest.json, background.js, contentScript.js, promptHook.js, options.html, options.js
-- vendor/ (markdown-it, highlight.js, KaTeX 등)
-- README.md / README.ja.md / README.zh.md
+## 🛠 필수 준비물
+이 확장 프로그램을 사용하려면 무료 **Google Gemini API Key**가 필요합니다.
+* [API 키 발급받기 (Google AI Studio)](https://aistudio.google.com/app/apikey)
 
-## TODO
-- Gemini 재시도/장문 대응, 에러 UI 개선
-- Claude/커스텀 엔드포인트 전환 지원
+## ⚙️ 설치 및 설정
+
+1.  **확장 프로그램 설치**
+    * Chrome 웹 스토어에서 다운로드하여 설치합니다.
+
+2.  **설정(Options) 열기**
+    * 브라우저 툴바의 퍼즐 아이콘🧩을 클릭하고 Bridge for ChatGPT의 '옵션'을 엽니다.
+    * **Your Main Language**: 번역 결과를 보고 싶은 언어(예: Korean / 한국어)를 선택합니다.
+    * **Gemini API Key**: 발급받은 API 키를 붙여넣습니다.
+    * **Save Settings**를 눌러 저장합니다.
+
+3.  **사용 방법**
+    * [chatgpt.com](https://chatgpt.com)에 접속합니다.
+    * 입력창 근처의 'Bridge' 토글이 **ON**으로 되어 있는지 확인합니다.
+    * 한국어로 자유롭게 입력하고 전송하세요.
+
+## 🔒 개인정보 처리방침
+* **데이터 처리:** 사용자가 입력한 텍스트는 오직 번역을 위해서만 Gemini API로 전송됩니다.
+* **저장하지 않음:** 개발자는 사용자의 프롬프트, 대화 내역, 개인 정보를 서버에 절대 저장하지 않습니다.
+* **직접 통신:** 모든 통신은 사용자의 브라우저와 API 제공자(OpenAI/Google) 간에 직접 이루어집니다.
