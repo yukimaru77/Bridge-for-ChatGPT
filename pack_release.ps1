@@ -12,6 +12,7 @@ $paths = @(
   "options.html",
   "options.js",
   "vendor",
+  "_locales",
   "LICENSE"
 )
 
