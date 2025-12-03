@@ -1,37 +1,23 @@
-# ChatGPT Translator / Prompt Translate (Chrome Extension)
+﻿# Bridge for ChatGPT — Translate & Prompt
 
-This extension does two things on ChatGPT:
+## What it does
+- Translate assistant messages (button on each assistant turn). Renders with markdown-it + highlight.js + KaTeX.
+- Translate outgoing prompts (toggle near the composer). Rewrites the prompt via Gemini, keeps the original, and shows a Show/Hide translated toggle in the last user bubble.
 
-1) **Translate** button on assistant messages  
-   - Grabs Markdown via the native copy button, translates (Gemini if API key is set; otherwise fallback endpoint), renders with markdown-it + highlight.js + KaTeX, and replaces the assistant message.
-2) **Prompt translate hook** (optional toggle)  
-   - Hooks `/backend-api/` requests in the page, sends the user prompt to Gemini (target language from Options), replaces the outgoing prompt, and logs the translated prompt.  
-   - Keeps the original prompt: after 3s, the latest user bubble is re-rendered with the original text and a Show/Hide toggle for the translated version.
+## Quick setup
+1. Load unpacked in Chrome: `chrome://extensions` → Developer mode → Load unpacked → this folder.
+2. Options: set **Source/Target language**.
+3. Options: set **Gemini API key** (model optional) and (if needed) prompt template.
 
-## Setup
+## Quick use
+- Assistant messages: click **Translate** to overwrite the message with translated HTML.
+- Prompts: toggle **Translate ON/OFF** near the composer. ON = prompt is translated to target language before sending; original + translated toggle appears in the last user bubble after ~3s.
 
-1. Load the folder as an unpacked extension in Chrome (`chrome://extensions`, enable Developer mode, “Load unpacked”).
-2. Open Options: set Gemini API key, target/source languages, model (`gemini-flash-latest` default), prompt template if needed, and Debug mode if you want Export/Gemini log buttons on messages.
-3. Ensure `promptHook.js` is allowed as a web accessible resource (already configured in `manifest.json`).
-
-## Usage
-
-- **Translate button**: on each assistant turn, click “Translate” to replace the message with translated HTML. Debug mode adds “Export log” / “Gemini log.”
-- **Prompt translate toggle**: near the composer’s audio controls there’s a “Translate ON/OFF” pill (localStorage-backed).  
-  - ON: user prompt is translated to the target language set in Options (Gemini) before sending; original prompt is kept and shown in the last user bubble with a Show/Hide translated toggle (3s delay).  
-  - OFF: no injection.
-
-## Notes
-
-- Markdown rendering: `markdown-it` + `highlight.js` + KaTeX; code blocks get copy buttons.
-- Injection bridge: page script (`promptHook.js`) posts to content script, which calls background Gemini translate and returns the result.
-- Paths of interest:  
-  - `contentScript.js` (UI + render logic + bridge + toggle)  
-  - `promptHook.js` (page-level fetch hook for prompt injection)  
-  - `background.js` (Gemini translate endpoint)  
-  - `options.html` / `options.js` (settings UI)
+## Files
+- manifest.json, background.js, contentScript.js, promptHook.js, options.html, options.js
+- vendor/ (markdown-it, highlight.js, KaTeX, etc.)
+- README.ja.md, README.zh.md, README.ko.md
 
 ## TODO
-- Gemini: retry/fallback handling for slow or failed responses; guard long outputs (truncate or stream).
-- Error handling: clearer user-facing errors instead of console logs.
-- Multi-provider support: add Claude / Gemini (UI selection) and generic custom endpoint mode.
+- Gemini retry/fallback and long-output handling; clearer error UI.
+- Provider selection: add Claude/custom endpoint.
