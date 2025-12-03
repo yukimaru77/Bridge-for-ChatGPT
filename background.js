@@ -1,10 +1,9 @@
 const DEFAULT_ENDPOINT = 'https://libretranslate.de/translate';
 const DEFAULT_TARGET_LANG = 'ja';
-const DEFAULT_SOURCE_LANG = 'auto';
 const SAMPLE_URL = chrome.runtime.getURL('sample.md');
 const DEFAULT_GEMINI_MODEL = 'gemini-flash-latest';
 const DEFAULT_PROMPT =
-  `Translate the following Markdown from {sourceLang} to {targetLang}. Return Markdown only.\n` +
+  `Translate the following Markdown from auto to {targetLang}. Return Markdown only.\n` +
   `Keep code fences, lists, tables intact. Do not translate or alter inline/block code.\n` +
   `Math/LaTeX must remain math: preserve $...$, $$...$$, \\(...\\), \\[...\\].\n` +
   `If you see bare bracketed math like [ ... ] or ( ... ) that appears to be math, wrap it in $$ ... $$ (block) or $ ... $ (inline) as appropriate instead of leaving raw brackets.\n` +
@@ -36,14 +35,14 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 async function translateMarkdown(markdown) {
-  const { endpoint, apiKey, targetLang, sourceLang } = await readSettings();
+  const { endpoint, apiKey, targetLang } = await readSettings();
 
   const url = (endpoint || DEFAULT_ENDPOINT).trim();
   const target = (targetLang || DEFAULT_TARGET_LANG).trim() || DEFAULT_TARGET_LANG;
 
   const payload = {
     q: markdown,
-    source: sourceLang || 'auto',
+    source: 'auto',
     target,
     format: 'text'
   };
@@ -87,7 +86,6 @@ function readSettings() {
         'endpoint',
         'apiKey',
         'targetLang',
-        'sourceLang',
         'geminiKey',
         'geminiModel',
         'promptTemplate'
@@ -105,13 +103,12 @@ async function fetchSample() {
 }
 
 async function translateWithGemini(markdown, overrides = {}) {
-  const { geminiKey, geminiModel, targetLang, sourceLang, promptTemplate } = await readSettings();
+  const { geminiKey, geminiModel, targetLang, promptTemplate } = await readSettings();
   if (!geminiKey) throw new Error('Gemini API key is not set in Options');
   const model = (geminiModel || DEFAULT_GEMINI_MODEL).trim() || DEFAULT_GEMINI_MODEL;
   const target = (overrides.targetLang || targetLang || DEFAULT_TARGET_LANG).trim() || DEFAULT_TARGET_LANG;
-  const source = (overrides.sourceLang || sourceLang || DEFAULT_SOURCE_LANG).trim() || DEFAULT_SOURCE_LANG;
   const promptText = buildPrompt(promptTemplate || DEFAULT_PROMPT, {
-    sourceLang: source,
+    sourceLang: 'auto',
     targetLang: target,
     markdown
   });
@@ -160,7 +157,7 @@ async function translateWithGemini(markdown, overrides = {}) {
 
 function buildPrompt(template, vars) {
   return template
-    .replaceAll('{sourceLang}', vars.sourceLang || '')
+    .replaceAll('{sourceLang}', vars.sourceLang || 'auto')
     .replaceAll('{targetLang}', vars.targetLang || '')
     .replaceAll('{markdown}', vars.markdown || '');
 }

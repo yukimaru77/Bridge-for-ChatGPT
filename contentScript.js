@@ -10,7 +10,7 @@ let md;
 let hljsAvailable = false;
 let katexAutoRenderAvailable = false;
 let debugModeEnabled = false;
-let settingsCache = { targetLang: 'en', sourceLang: 'auto' };
+let settingsCache = { targetLang: 'en' };
 const PROMPT_TARGET_LANG = 'en';
 const ChatgptLikeMarkdownRenderer = {
   render(markdown) {
@@ -582,7 +582,6 @@ async function loadSettings() {
     const settings = await readSettings();
     debugModeEnabled = Boolean(settings.debugMode);
     if (settings.targetLang) settingsCache.targetLang = settings.targetLang;
-    if (settings.sourceLang) settingsCache.sourceLang = settings.sourceLang;
   } catch {
     debugModeEnabled = false;
   }
@@ -596,7 +595,7 @@ function readSettings() {
       return;
     }
     api.get(
-      ['useSample', 'geminiKey', 'geminiModel', 'debugMode', 'targetLang', 'sourceLang'],
+      ['useSample', 'geminiKey', 'geminiModel', 'debugMode', 'targetLang'],
       (items) => resolve(items || {})
     );
   });
@@ -723,7 +722,7 @@ window.addEventListener('message', async (event) => {
       type: 'translate-markdown-gemini',
       markdown: data.text,
       targetLang: PROMPT_TARGET_LANG,
-      sourceLang: settingsCache.sourceLang || 'auto'
+      sourceLang: 'auto'
     });
     window.postMessage(
       {

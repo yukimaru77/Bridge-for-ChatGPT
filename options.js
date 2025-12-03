@@ -1,5 +1,4 @@
 const form = document.getElementById('settings');
-const sourceLangInput = document.getElementById('sourceLang');
 const targetLangInput = document.getElementById('targetLang');
 const geminiKeyInput = document.getElementById('geminiKey');
 const geminiModelInput = document.getElementById('geminiModel');
@@ -8,7 +7,6 @@ const promptTemplateInput = document.getElementById('promptTemplate');
 
 chrome.storage.sync.get(
   [
-    'sourceLang',
     'targetLang',
     'geminiKey',
     'geminiModel',
@@ -16,7 +14,6 @@ chrome.storage.sync.get(
     'promptTemplate'
   ],
   (items) => {
-    if (items.sourceLang) sourceLangInput.value = items.sourceLang;
     if (items.targetLang) targetLangInput.value = items.targetLang;
     if (items.geminiKey) geminiKeyInput.value = items.geminiKey;
     if (items.geminiModel) geminiModelInput.value = items.geminiModel;
@@ -39,7 +36,6 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   chrome.storage.sync.set(
     {
-      sourceLang: sourceLangInput.value.trim(),
       targetLang: targetLangInput.value.trim(),
       geminiKey: geminiKeyInput.value.trim(),
       geminiModel: geminiModelInput.value.trim(),
