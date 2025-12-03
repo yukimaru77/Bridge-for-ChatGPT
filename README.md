@@ -1,3 +1,20 @@
+<div align="center">
+
+<a href="./README.md">
+  <img src="https://img.shields.io/badge/English-000000?style=for-the-badge&logo=google-translate&logoColor=white" alt="English">
+</a>
+<a href="./README.ja.md">
+  <img src="https://img.shields.io/badge/日本語-JP?style=for-the-badge&logo=google-translate&logoColor=white&color=B22222" alt="日本語">
+</a>
+<a href="./README.zh.md">
+  <img src="https://img.shields.io/badge/简体中文-CN?style=for-the-badge&logo=google-translate&logoColor=white&color=D32F2F" alt="简体中文">
+</a>
+<a href="./README.ko.md">
+  <img src="https://img.shields.io/badge/한국어-KR?style=for-the-badge&logo=google-translate&logoColor=white&color=000080" alt="한국어">
+</a>
+
+</div>
+
 # Bridge for ChatGPT — Translate & Prompt
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![License](https://img.shields.io/badge/license-MIT-green)
