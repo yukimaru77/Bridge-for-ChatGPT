@@ -1,4 +1,4 @@
 {
   "appName": { "message": "Bridge for ChatGPT — Translate & Prompt" },
-  "appDesc": { "message": "自动将提示词英译以提升回答准确度，回复一键译回你的语言。" }
+  "appDesc": { "message": "众所周知 ChatGPT 用英语时应答质量最佳。本扩展会自动将你发送的提示词翻译成英语以提升质量，ChatGPT 的回复可一键立即翻回日语。" }
 }

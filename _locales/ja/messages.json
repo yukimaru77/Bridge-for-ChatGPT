@@ -1,4 +1,4 @@
 {
   "appName": { "message": "Bridge for ChatGPT — Translate & Prompt" },
-  "appDesc": { "message": "プロンプトの自動英訳で回答精度最大化、回答はボタンで日本語へ。" }
+  "appDesc": { "message": "ChatGPTの応答品質は英語が一番いいことが知られています。この拡張機能はChatGPTへ送信したプロンプトを内部で自動英訳を行い応答品質を向上させます。ChatGPTからの応答はボタンをクリックすることで即座に日本語へ可能です。" }
 }
